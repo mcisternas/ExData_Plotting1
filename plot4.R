@@ -1,11 +1,16 @@
+#Read data set into data frame
 df = read.csv("household_power_consumption.txt", sep=";", as.is=TRUE)
 
+#Subset the dates we are interested in
 df2<-subset(df,Date=="1/2/2007" | Date=="2/2/2007")
 
+#Create a new date column, combining the date and time columns
 df2$newdate <- with(df2, as.POSIXct(paste(Date, Time), format="%d/%m/%Y %H:%M"))
 
+#Create the plot in a png device
 png(file="plot4.png", width=480, height=480)
 
+#Set a 2x2 layout
 par(mfrow = c(2,2))
 
 with(df2, {
